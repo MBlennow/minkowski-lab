@@ -13,5 +13,6 @@
     "start": "node tools/serve.mjs",
     "check": "node tools/check.mjs",
     "test": "node tests/fullscreen.mjs && node tests/keyboard.mjs && node tests/geometry.mjs"
-  }
+  },
+  "license": "CC-BY-NC-4.0"
 }

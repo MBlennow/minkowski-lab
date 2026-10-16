@@ -6,19 +6,22 @@ export const projectRoot = fileURLToPath(new URL('../', import.meta.url));
 
 /** Bundle the editable sources into the complete offline application. */
 export async function build() {
-  const [template, styles, script] = await Promise.all([
+  const [template, styles, script, license] = await Promise.all([
     readFile(new URL('../src/index.template.html', import.meta.url), 'utf8'),
     readFile(new URL('../src/styles.css', import.meta.url), 'utf8'),
     readFile(new URL('../src/app.js', import.meta.url), 'utf8'),
+    readFile(new URL('../LICENSE', import.meta.url), 'utf8'),
   ]);
-  for (const marker of ['<!-- INLINE_STYLES -->', '<!-- INLINE_SCRIPT -->']) {
+  for (const marker of ['<!-- INLINE_STYLES -->', '<!-- INLINE_SCRIPT -->', '<!-- INLINE_LICENSE -->']) {
     if (template.split(marker).length !== 2) {
       throw new Error(`The HTML template must contain exactly one ${marker} marker.`);
     }
   }
   // Callback replacements preserve literal dollar signs in JavaScript and CSS.
+  const escapeHtml = text => text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   const html = template
     .replace('<!-- INLINE_STYLES -->', () => `<style>${styles}</style>`)
+    .replace('<!-- INLINE_LICENSE -->', () => escapeHtml(license))
     .replace('<!-- INLINE_SCRIPT -->', () => `<script>${script}</script>`);
   await writeFile(new URL('../index.html', import.meta.url), html, 'utf8');
   return html;

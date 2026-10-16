@@ -38,7 +38,7 @@ These are lightweight source checks, not a complete browser test suite. Run `npm
 
 | File | Purpose |
 | --- | --- |
-| `src/index.template.html` | Page structure, labels, help text, and the default embedded-scene slot. The two comment markers are replaced during the build. |
+| `src/index.template.html` | Page structure, labels, help text, and the default embedded-scene slot. The styles, script and licence comment markers are replaced during the build. |
 | `src/styles.css` | Layout, responsive styling, KTH interface palette, and colour-palette dialog styling. |
 | `src/app.js` | Lorentz transformations, rendering, drawing and editing, colour selection, animation, presets, history, and scene export/import. |
 | `index.html` | Generated, fully self-contained app. This is the file to distribute or open offline. |
@@ -46,6 +46,7 @@ These are lightweight source checks, not a complete browser test suite. Run `npm
 | `tools/serve.mjs` | Local-only preview server with rebuild on refresh. |
 | `tools/check.mjs` | Lightweight source and build checks. |
 | `package.json` | Convenient local commands. |
+| `LICENSE` | Complete CC BY-NC 4.0 legal text, also embedded into the standalone app during the build. |
 
 Edit the files in **src/**, then rebuild. Direct changes to `index.html` are overwritten by the next build. The template is not intended to be opened directly in a browser.
 
@@ -147,3 +148,15 @@ The Euclidean examples are geometric comparisons, not alternative relativistic p
 In Minkowski mode, choose **Light cone** and click its vertex. The full past and future cone is one selectable object. Its vertex transforms with the diagram; both null lines stay at 45°. Drag it, change its colour/style, edit its centre, duplicate it or delete it like other objects. The existing light-cone display checkbox only controls the faint guide through the origin, not these user-created cones.
 
 For local development, `state.geometry` selects the metric. The internal second-coordinate property remains `t` in both modes for file compatibility; the Euclidean interface labels it `y`. `state.eta` stores rapidity in Minkowski mode and angle in radians in Euclidean mode. The optional `alternateScene` holds the other geometry without nested alternates. `tests/geometry.mjs` verifies metric preservation, line alignment, circles, cone vertices, example lengths and scene migration.
+
+## Licence and attribution
+
+Minkowski Lab by [MBlennow](https://github.com/MBlennow/minkowski-lab).
+
+The application, source code, built-in examples and documentation are licensed under **[Creative Commons Attribution–NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/)**, unless otherwise noted. The complete legal terms are in [LICENSE](LICENSE) and in the app’s help dialog, including offline copies.
+
+You may share and adapt the project for noncommercial purposes, provided you give appropriate credit, link to the licence, and indicate any changes. Suggested attribution:
+
+> Minkowski Lab by MBlennow — https://github.com/MBlennow/minkowski-lab — licensed under CC BY-NC 4.0 (https://creativecommons.org/licenses/by-nc/4.0/).
+
+For modified versions, add a description of your changes. This licence covers the supplied project material; it does not claim rights over users’ own drawings. KTH names and marks are not licensed under this notice, and no endorsement is implied.
